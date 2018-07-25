@@ -68,15 +68,15 @@ var prefix = ".";
     let args = message.content.split(' ').slice(1).join(' ');
 if(message.content.split(' ')[0] == prefix + 'bc') {
     if (!args[1]) {
-message.channel.send("**.bc <message>**");
+message.channel.send("**__رجاء اكتب بعد الامر رسالة » .bc [message]__**");
 return;
 }
         message.guild.members.forEach(m => {
    if(!message.member.hasPermission('MANAGE_SERVER')) return;
             var bc = new Discord.RichEmbed()
-            .addField('» السيرفر :', `${message.guild.name}`)
-            .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
-            .addField(' » الرسالة : ', args)
+            .addField('🔥» السيرفر :', `${message.guild.name}`)
+            .addField('🙋» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
+            .addField('💌» الرسالة : ', args)
             .setColor('#ff0000')
             // m.send(`[${m}]`);
             m.send(`${m}`,{embed: bc});
