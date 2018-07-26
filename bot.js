@@ -471,4 +471,71 @@ client.on("message", message => {
   
   });
   
+client.on('message', message => {
+    if (message.author.bot) return;
+     if (message.content === prefix + "help") {
+		 message.channel.send('**The Message Was Sent On Private**');
+            
+	
+		 
+
+
+ message.author.sendMessage(`
+ **
+┏━━━┓╋╋╋╋╋╋┏━━━┳┓
+┃┏━━┛╋╋╋╋╋╋┃┏━┓┃┃
+┃┗━━┳┳━┳━━┓┃┃╋┗┫┃┏━━┳━┓
+┃┏━━╋┫┏┫┃━┫┃┃╋┏┫┃┃┏┓┃┏┓┓
+┃┃╋╋┃┃┃┃┃━┫┃┗━┛┃┗┫┏┓┃┃┃┃
+┗┛╋╋┗┻┛┗━━┛┗━━━┻━┻┛┗┻┛┗┛
+╔[❖════════════❖]╗
+             Prefix = ' . '
+╚[❖════════════❖]╝
+
+╔[❖════════════❖]╗
+             Admin Commands
+╚[❖════════════❖]╝
+
+ ❖ .kick <mention > ➾ kick member from server
+
+ ❖ .ban <mention > ➾ ban member from server
+
+ ❖ .clear ➾ clear chat ( not ready yet fixing)
+ 
+ ❖ *mute < mention > ➾ mute member
+
+ ❖ *unmute <mention> ➾ unmute member
+
+ ❖ .ct <name> ➾ create channel
+
+ ❖ .cv <name> create voice channel
+  
+ ❖ .bc <message> ➾ message all members in server
+
+
+╔[❖════════════❖]╗
+            General  Commands
+╚[❖════════════❖]╝
+
+❖ .roll <number> ➾ role 
+
+❖ .cuttwee ➾ cuttwee
+
+❖ .id ➾ your id
+
+❖ .avatar ➾ your avatar account
+
+❖ .help ➾ help by bot
+
+❖ .ping ➾ to see ping
+
+❖ .server ➾ server informations 
+
+❖ .رابط ➾ invites to server
+
+
+`);
+
+    }
+});
 client.login(process.env.BOT_TOKEN);
