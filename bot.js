@@ -293,7 +293,6 @@ if(!args[0]) return message.reply('مرجو كتابة نص الدي تريد');
 });
 
 
-const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
