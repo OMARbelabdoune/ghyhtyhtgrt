@@ -317,213 +317,79 @@ if(!args[0]) return message.reply('مرجو كتابة نص الدي تريد');
 
 
 
-client.on('message', async msg => { 
-	if (msg.author.bot) return undefined;
-	if (!msg.content.startsWith(prefix)) return undefined;
-	const args = msg.content.split(' ');
-	const searchString = args.slice(1).join(' ');
-	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(msg.guild.id);
-	let command = msg.content.toLowerCase().split(" ")[0];
-	command = command.slice(prefix.length)
-	if (command === `play`) {
-		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send('يجب توآجد حضرتك بروم صوتي .');
-		const permissions = voiceChannel.permissionsFor(msg.client.user);
-		if (!permissions.has('CONNECT')) {
-			
-			return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
-		}
-		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
-		}
+const Sra7a = [
+     'صراحه  |  صوتك حلوة؟',
+     'صراحه  |  التقيت الناس مع وجوهين؟',
+     'صراحه  |  شيء وكنت تحقق اللسان؟',
+     'صراحه  |  أنا شخص ضعيف عندما؟',
+     'صراحه  |  هل ترغب في إظهار حبك ومرفق لشخص أو رؤية هذا الضعف؟',
+     'صراحه  |  يدل على أن الكذب مرات تكون ضرورية شي؟',
+     'صراحه  |  أشعر بالوحدة على الرغم من أنني تحيط بك كثيرا؟',
+     'صراحه  |  كيفية الكشف عن من يكمن عليك؟',
+     'صراحه  |  إذا حاول شخص ما أن يكرهه أن يقترب منك ويهتم بك تعطيه فرصة؟',
+     'صراحه  |  أشجع شيء حلو في حياتك؟',
+     'صراحه  |  طريقة جيدة يقنع حتى لو كانت الفكرة خاطئة" توافق؟',
+     'صراحه  |  كيف تتصرف مع من يسيئون فهمك ويأخذ على ذهنه ثم ينتظر أن يرفض؟',
+     'صراحه  |  التغيير العادي عندما يكون الشخص الذي يحبه؟',
+     'صراحه  |  المواقف الصعبة تضعف لك ولا ترفع؟',
+     'صراحه  |  نظرة و يفسد الصداقة؟',
+     'صراحه  |  ‏‏إذا أحد قالك كلام سيء بالغالب وش تكون ردة فعلك؟',
+     'صراحه  |  شخص معك بالحلوه والمُره؟',
+     'صراحه  |  ‏هل تحب إظهار حبك وتعلقك بالشخص أم ترى ذلك ضعف؟',
+     'صراحه  |  تأخذ بكلام اللي ينصحك ولا تسوي اللي تبي؟',
+     'صراحه  |  وش تتمنى الناس تعرف عليك؟',
+     'صراحه  |  ابيع المجرة عشان؟',
+     'صراحه  |  أحيانا احس ان الناس ، كمل؟',
+     'صراحه  |  مع مين ودك تنام اليوم؟',
+     'صراحه  |  صدفة العمر الحلوة هي اني؟',
+     'صراحه  |  الكُره العظيم دايم يجي بعد حُب قوي " تتفق؟',
+     'صراحه  |  صفة تحبها في نفسك؟',
+     'صراحه  |  ‏الفقر فقر العقول ليس الجيوب " ، تتفق؟',
+     'صراحه  |  تصلي صلواتك الخمس كلها؟',
+     'صراحه  |  ‏تجامل أحد على راحتك؟',
+     'صراحه  |  اشجع شيء سويتة بحياتك؟',
+     'صراحه  |  وش ناوي تسوي اليوم؟',
+     'صراحه  |  وش شعورك لما تشوف المطر؟',
+     'صراحه  |  غيرتك هاديه ولا تسوي مشاكل؟',
+     'صراحه  |  ما اكثر شي ندمن عليه؟',
+     'صراحه  |  اي الدول تتمنى ان تزورها؟',
+     'صراحه  |  متى اخر مره بكيت؟',
+     'صراحه  |  تقيم حظك ؟ من عشره؟',
+     'صراحه  |  هل تعتقد ان حظك سيئ؟',
+     'صراحه  |  شـخــص تتمنــي الإنتقــام منـــه؟',
+     'صراحه  |  كلمة تود سماعها كل يوم؟',
+     'صراحه  |  **هل تُتقن عملك أم تشعر بالممل؟',
+     'صراحه  |  هل قمت بانتحال أحد الشخصيات لتكذب على من حولك؟',
+     'صراحه  |  متى آخر مرة قمت بعمل مُشكلة كبيرة وتسببت في خسائر؟',
+     'صراحه  |  ما هو اسوأ خبر سمعته بحياتك؟',
+     '‏صراحه | هل جرحت شخص تحبه من قبل ؟',
+     'صراحه  |  ما هي العادة التي تُحب أن تبتعد عنها؟',
+     '‏صراحه | هل تحب عائلتك ام تكرههم؟',
+     '‏صراحه  |  من هو الشخص الذي يأتي في قلبك بعد الله – سبحانه وتعالى- ورسوله الكريم – صلى الله عليه وسلم؟',
+     '‏صراحه  |  هل خجلت من نفسك من قبل؟',
+     '‏صراحه  |  ما هو ا الحلم  الذي لم تستطيع ان تحققه؟',
+     '‏صراحه  |  ما هو الشخص الذي تحلم به كل ليلة؟',
+     '‏صراحه  |  هل تعرضت إلى موقف مُحرج جعلك تكره صاحبهُ؟',
+	  '‏صراحه  |  هل قمت بالبكاء أمام من تُحب؟',
+     '‏صراحه  |  ماذا تختار حبيبك أم صديقك؟',
+     '‏صراحه  | هل حياتك سعيدة أم حزينة؟',
+     'صراحه  |  ما هي أجمل سنة عشتها بحياتك؟',
+     '‏صراحه  |  ما هو عمرك الحقيقي؟',
+     '‏صراحه  |  ما اكثر شي ندمن عليه؟',
+	 'صراحه  |  ما هي أمنياتك المُستقبلية؟‏',
+]
+   client.on('message', message => {
+ if (message.content.startsWith('.صراحه')) {
+     if(!message.channel.guild) return message.reply('** This command only for servers **');
+  var client= new Discord.RichEmbed()
+  .setTitle("لعبة صراحة ..")
+  .setColor('RANDOM')
+  .setDescription(`${Sra7a[Math.floor(Math.random() * Sra7a.length)]}`)
+  .setImage("https://cdn.discordapp.com/attachments/371269161470525444/384103927060234242/125.png")
+                  .setTimestamp()
 
-		if (!permissions.has('EMBED_LINKS')) {
-			return msg.channel.sendMessage("**يجب توآفر برمشن `EMBED LINKS`لدي **")
-		}
-
-		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = await youtube.getPlaylist(url);
-			const videos = await playlist.getVideos();
-			
-			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id);
-				await handleVideo(video2, msg, voiceChannel, true);
-			}
-			return msg.channel.send(` **${playlist.title}** تم الإضآفة إلى قأئمة التشغيل`);
-		} else {
-			try {
-
-				var video = await youtube.getVideo(url);
-			} catch (error) {
-				try {
-					var videos = await youtube.searchVideos(searchString, 5);
-					let index = 0;
-					const embed1 = new Discord.RichEmbed()
-			        .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
-${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
-
-					.setFooter("name bot")
-					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
-					
-					try {
-						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-							maxMatches: 1,
-							time: 15000,
-							errors: ['time']
-						});
-					} catch (err) {
-						console.error(err);
-						return msg.channel.send('لم يتم إختيآر مقطع صوتي');
-					}
-					const videoIndex = parseInt(response.first().content);
-					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-				} catch (err) {
-					console.error(err);
-					return msg.channel.send(':X: لا يتوفر نتآئج بحث ');
-				}
-			}
-
-			return handleVideo(video, msg, voiceChannel);
-		}
-	} else if (command === `skip`) {
-		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
-		serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
-		return undefined;
-	} else if (command === `stop`) {
-		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لإيقآفه');
-		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('تم إيقآف هذآ المقطع');
-		return undefined;
-	} else if (command === `vol`) {
-		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
-		if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
-		serverQueue.volume = args[1];
-		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
-		return msg.channel.send(`:speaker: تم تغير الصوت الي **${args[1]}**`);
-	} else if (command === `np`) {
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
-		const embedNP = new Discord.RichEmbed()
-	.setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`)
-		return msg.channel.sendEmbed(embedNP);
-	} else if (command === `queue`) {
-		
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
-		let index = 0;
-		
-		const embedqu = new Discord.RichEmbed()
-
-.setDescription(`**Songs Queue**
-${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
-**الان يتم تشغيل** ${serverQueue.songs[0].title}`)
-		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `pause`) {
-		if (serverQueue && serverQueue.playing) {
-			serverQueue.playing = false;
-			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send('تم إيقاف الموسيقى مؤقتا!');
-		}
-		return msg.channel.send('لا يوجد شيء حالي ف العمل.');
-	} else if (command === "resume") {
-		if (serverQueue && !serverQueue.playing) {
-			serverQueue.playing = true;
-			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('استأنفت الموسيقى بالنسبة لك !');
-		}
-		return msg.channel.send('لا يوجد شيء حالي في العمل.');
-	}
-
-	return undefined;
-});
-
-async function handleVideo(video, msg, voiceChannel, playlist = false) {
-	const serverQueue = queue.get(msg.guild.id);
-	console.log(video);
-	
-//	console.log('yao: ' + Util.escapeMarkdown(video.thumbnailUrl));
-	const song = {
-		id: video.id,
-		title: Util.escapeMarkdown(video.title),
-		url: `https://www.youtube.com/watch?v=${video.id}`
-	};
-	if (!serverQueue) {
-		const queueConstruct = {
-			textChannel: msg.channel,
-			voiceChannel: voiceChannel,
-			connection: null,
-			songs: [],
-			volume: 5,
-			playing: true
-		};
-		queue.set(msg.guild.id, queueConstruct);
-
-		queueConstruct.songs.push(song);
-
-		try {
-			var connection = await voiceChannel.join();
-			queueConstruct.connection = connection;
-			play(msg.guild, queueConstruct.songs[0]);
-		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}`);
-			queue.delete(msg.guild.id);
-			return msg.channel.send(`لا أستطيع دخول هذآ الروم ${error}`);
-		}
-	} else {
-		serverQueue.songs.push(song);
-		console.log(serverQueue.songs);
-		if (playlist) return undefined;
-		else return msg.channel.send(` **${song.title}** تم اضافه الاغنية الي القائمة!`);
-	}
-	return undefined;
-}
-
-function play(guild, song) {
-	const serverQueue = queue.get(guild.id);
-
-	if (!song) {
-		serverQueue.voiceChannel.leave();
-		queue.delete(guild.id);
-		return;
-	}
-	console.log(serverQueue.songs);
-
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
-		.on('end', reason => {
-			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason);
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
-		.on('error', error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-
-	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
-}
-const adminprefix = "-v";
-const devs = ['349616310734553088','335027415619338240'];
-client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
-    
-if (message.content.startsWith(adminprefix + 'setgame')) {
-  client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
-} else 
-  if (message.content.startsWith(adminprefix + 'setname')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else     
-if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
-}
+   message.channel.sendEmbed(client);
+   message.react("??")
+ }
 });
 client.login(process.env.BOT_TOKEN);
