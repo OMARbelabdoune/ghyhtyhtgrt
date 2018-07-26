@@ -284,7 +284,7 @@ client.on('message', message => {
 	var prefix = ".";
 if (message.content.startsWith(prefix + 'tag')) {
     let args = message.content.split(" ").slice(1);
-if(!args[0]) return message.reply('مرجو كتابة نص الدي تريد');  
+if(!args[0]) return message.reply('**__المرجو كتابة نص **__الذي تريد');  
 
     figlet(args.join(" "), (err, data) => {
               message.channel.send("```" + data + "```")
