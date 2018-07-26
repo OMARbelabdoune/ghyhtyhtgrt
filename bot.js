@@ -105,6 +105,7 @@ client.on('message', function(msg) {
       msg.channel.send({embed:embed});
     }
   });
+
  client.on("message", function(message) {
     let toBan = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
@@ -131,7 +132,7 @@ client.on('message', function(msg) {
        
    }
 });
-===============================================================================================
+
 client.on('message', message => {
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
@@ -170,17 +171,14 @@ client.on('message', message => {
   })
 }
 });
-===============================================================================================
+
 client.on("message", (message) => {
 if (message.content.startsWith(".ct")) {
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
         let args = message.content.split(" ").slice(1);
-    message.guild.createChannel(args.join(' '), 'text');
-message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
-
-}
+    vc 
 });
-================================================================================================
+	
 client.on("message", (message) => {
 if (message.content.startsWith(".cv")) {
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
@@ -190,7 +188,7 @@ if (message.content.startsWith(".cv")) {
     
 }
 });
-===============================================================================================
+
 client.on('message', message => {
        if(message.content === prefix + "mutechannel") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
@@ -217,7 +215,7 @@ client.on('message', message => {
     }
        
 });
-===============================================================================================
+	
 client.on('message', msg => {
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
@@ -241,7 +239,7 @@ client.on('message', msg => {
     }
 }
 });
-===============================================================================================
+
    client.on("message", msg => {
            var prefix = ".";
   if(msg.content.startsWith (prefix + "id")) {
@@ -261,7 +259,7 @@ client.on('message', msg => {
       msg.channel.send({embed: embed})
   }
 });
-===============================================================================================
+
 client.on('message', message => {
     if (message.content.startsWith(".avatar")) {
         var mentionned = message.mentions.users.first();
@@ -278,7 +276,6 @@ client.on('message', message => {
       message.channel.sendEmbed(embed);
     }
 });
-===============================================================================================
  const cuttweet = [
      'كت تويت ‏| تخيّل لو أنك سترسم شيء وحيد فيصبح حقيقة، ماذا سترسم؟',
      'كت تويت | أكثر شيء يُسكِت الطفل برأيك؟',
@@ -321,7 +318,7 @@ client.on('message', message => {
   console.log('[id] Send By: ' + message.author.username)
     }
 });
-===============================================================================================
+
 client.on('message', function(message) {
     if(message.content.startsWith(prefix + 'roll')) {
         let args = message.content.split(" ").slice(1);
@@ -343,7 +340,7 @@ client.on('message', message => {
         message.channel.sendMessage(':ping_pong: Pong! In `' + `${client.ping}` + ' ms`');
     }
 });
-===============================================================================================
+	
 client.on('message', message => {
           let args = message.content.split(' ').slice(1);
    if(message.content.split(' ')[0] == '.color'){
@@ -417,7 +414,7 @@ client.on('message', ra3d => {
     });
 
 });
-===============================================================================================      
+	
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
