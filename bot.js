@@ -27,7 +27,7 @@ client.user.setGame(`Nothing`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
 });
-===============================================================================================
+
 client.on('message', message => {
     if (message.content.startsWith("رابط")) {
  
@@ -58,7 +58,7 @@ client.on('message', message => {
       message.author.sendEmbed(Embed11)
     }
 });
-===============================================================================================
+
 client.on('message', message => {
 var prefix = ".";
 
@@ -86,7 +86,7 @@ return;
         return;
     }
 });
-===============================================================================================
+
 client.on('message', function(msg) {
     if(msg.content.startsWith (prefix  + 'server')) {
       let embed = new Discord.RichEmbed()
@@ -105,7 +105,6 @@ client.on('message', function(msg) {
       msg.channel.send({embed:embed});
     }
   });
-===============================================================================================
  client.on("message", function(message) {
     let toBan = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
